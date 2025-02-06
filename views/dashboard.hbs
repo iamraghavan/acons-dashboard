@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{title}}</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+  {{> sidebar}}
+  {{> header}}
+  <div class="content">
+
+    <div class="cards">
+      <div class="card">
+        <div class="card-body">
+          {{!-- <h5 class="card-title">My Circulars</h5>
+          <p class="card-text">You have {{data.circulars}} circulars.</p> --}}
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">My Gallery Folders</h5>
+          <p class="card-text">You have <span id="galleryFolders">0</span> gallery folders.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">My Photos</h5>
+          <p class="card-text">You have <span id="photos">0</span> photos.</p>
+        </div>
+      </div>
+      <div class="card">
+        {{!-- <div class="card-body">
+          <h5 class="card-title">My Events</h5>
+          <p class="card-text">You have {{data.events}} events created.</p> --}}
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script>
+    async function fetchDashboardData() {
+      try {
+        const response = await fetch("/dashboard-data");
+        const data = await response.json();
+
+        if (data.success) {
+          // Update the DOM with the fetched data
+          document.getElementById("galleryFolders").textContent = data.data.galleryFolders;
+          document.getElementById("photos").textContent = data.data.photos;
+        } else {
+          console.error("Error fetching dashboard data:", data.message);
+        }
+      } catch (error) {
+        console.error("Error fetching dashboard data:", error);
+      }
+    }
+
+    // Fetch data when the page loads
+    window.onload = fetchDashboardData;
+  </script>
+</body>
+
+</html>

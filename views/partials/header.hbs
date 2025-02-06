@@ -1,0 +1,18 @@
+<div class="topbar">
+  <h2>Welcome, <span style="color:red">{{user.email}}</span></h2>
+  <div class="timer" id="timer"></div>
+  <img src="https://ui-avatars.com/api/?name={{user.email}}" alt="Profile Image" />
+</div>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    function updateTime() {
+      const now = new Date();
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const seconds = String(now.getSeconds()).padStart(2, '0');
+      document.getElementById('timer').textContent = `${hours}:${minutes}:${seconds}`;
+    }
+    setInterval(updateTime, 1000);
+    updateTime();
+  });
+</script>
