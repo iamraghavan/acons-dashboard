@@ -14,34 +14,20 @@ const PORT = process.env.PORT || 3001;
 app.use(helmet({
     contentSecurityPolicy: {
         directives: {
-            defaultSrc: ["'self'"],
-            scriptSrc: [
-                "'self'",
-                "https://code.jquery.com",
-                "https://cdn.jsdelivr.net",
-                "https://stackpath.bootstrapcdn.com",
-                "'unsafe-inline'"  // Allow inline scripts (less secure)
-            ],
-            scriptSrcAttr: ["'self'", "'unsafe-inline'"], // Allow inline event handlers (less secure)
-            styleSrc: [
-                "'self'",
-                "https://stackpath.bootstrapcdn.com",
-                "https://cdnjs.cloudflare.com", // Allow FontAwesome from CDNJS
-                "'unsafe-inline'"  // Allow inline styles
-            ],
-            fontSrc: [
-                "'self'",
-                "https://stackpath.bootstrapcdn.com",
-                "https://cdnjs.cloudflare.com", // Allow FontAwesome fonts from CDNJS
-                "data:" // Allow fonts from data URIs
-            ],
-            imgSrc: ["'self'", "https://ui-avatars.com"],
-            connectSrc: ["'self'"],
-            objectSrc: ["'none'"],
-            upgradeInsecureRequests: []
+            defaultSrc: ["*"],
+            scriptSrc: ["*"],
+            styleSrc: ["*", "'unsafe-inline'"],
+            fontSrc: ["*"],
+            imgSrc: ["*"],
+            connectSrc: ["*"],
+            objectSrc: ["*"],
+            mediaSrc: ["*"],
+            frameSrc: ["*"]
         }
     }
 }));
+
+
 app.use(compression());
 app.use(express.json());  
 app.use(express.urlencoded({ extended: true }));
